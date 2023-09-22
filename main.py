@@ -152,9 +152,6 @@ def get_userforgenre(genero: str):
 def get_developer(desarrollador: str):
     return developer(desarrollador)
 
-@app.exception_handler(ValueError)
-async def value_error_exception_handler(request: Request, exc: ValueError):
-    return JSONResponse(
-        status_code=400,
-        content={"message": str(exc)},
-    )
+@app.get("/recomendacion_juego/{id_producto}")
+def get_recomendacion_juego(id_producto: int):
+    return recomendacion_juego(id_producto)
