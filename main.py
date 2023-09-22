@@ -11,7 +11,7 @@ games = pd.read_parquet("games.parquet")
 items = pd.read_parquet("items.parquet")
 generos = pd.read_parquet("generos.parquet")
 userforgenres = pd.read_parquet("usergenre.parquet")
-modelo_final = pd.read_parquet("modelo_final.parquet")
+modelo_final = pd.read_parquet("modelo_final_liviano.parquet")
 
 
 similitudes = cosine_similarity(modelo_final.iloc[:,2:]) #MODELO
