@@ -61,4 +61,4 @@ Este proyecto fue realizado por **Gustavo Castellón** como parte del bootcamp d
 ### Enlaces de Interés
 
 - [API en Render](https://fi-henry-ds.onrender.com/docs)
-- [Video de Presentación](https://www.youtube.com/)
+- [Video de Presentación](https://www.youtube.com/watch?v=zx3Y8GSSBbw)
