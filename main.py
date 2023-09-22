@@ -66,7 +66,27 @@ def userforgenre(genero):
             devolver["URL"].append("Empty")
     return devolver
 
-
+def developer(desarrollador):
+    años = games[games["developer"]==desarrollador]["release_date"]
+    years = []
+    for año in años:
+        if año.year not in years:
+            years.append(año.year)
+    if len(years)==0:
+        return {"Message":"No se encuentra la desarrolladora"}
+    years.sort()
+    devolver = {"año": [], "cantidad":[], "free": []}
+    for año in years:
+        cantidad = games[(games["developer"]==desarrollador) & (games["release_date"].dt.year==año)].shape[0]
+        free = games[(games["developer"]==desarrollador) & (games["price"]==0) & (games["release_date"].dt.year==año)].shape[0]
+        free = str(round((free/cantidad)*100,2))
+        try:
+            devolver["año"].append(str(año))
+            devolver["cantidad"].append(str(cantidad))
+            devolver["free"].append(f"{free}%")
+        except:
+            continue
+    return devolver
 
 
 @app.get("/")
@@ -94,5 +114,7 @@ async def get_genre(genero: str):
 def get_userforgenre(genero: str):
     return userforgenre(genero)
 
-
+@app.get("/developer/{desarrollador}")
+def get_developer(desarrollador: str):
+    return developer(desarrollador)
 
