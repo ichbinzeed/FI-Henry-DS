@@ -57,3 +57,8 @@ Una vez que los datos están listos y se ha realizado un EDA completo, entrenamo
 
 --------
 Este proyecto fue realizado por **Gustavo Castellón** como parte del bootcamp de Data Science de Henry.
+
+### Enlaces de Interés
+
+- [API en Render](https://fi-henry-ds.onrender.com/docs)
+- [Video de Presentación](https://www.youtube.com/)
