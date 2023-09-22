@@ -14,7 +14,7 @@ games = pd.read_parquet("games.parquet")
 items = pd.read_parquet("items.parquet")
 generos = pd.read_parquet("generos.parquet")
 userforgenres = pd.read_parquet("usergenre.parquet")
-modelo_final = pd.read_parquet("modelo_final_liviano.parquet")
+
 
 
 def userdata(user_id):
@@ -96,33 +96,6 @@ def developer(desarrollador):
 #Entrenamiento del modelo
 similitudes = cosine_similarity(modelo_final.iloc[:,2:])
 
-def recomendacion_juego(id_producto):
-    # Encuentra el índice del producto en el DataFrame 'modelo_final'
-    try:
-        index = modelo_final[modelo_final['id'] == id_producto].index[0]
-    except:
-        return {"Message":"No se encuentra el ID"}
-
-    # Obtengo el nombre para usarlo despues en la devolucion
-    nombre = modelo_final[modelo_final['id'] == id_producto]["title"].values[0]
-
-    # Obtiene las similitudes del producto con todos los demás productos
-    sim_scores = list(enumerate(similitudes[index]))
-
-    # Ordena las similitudes en orden descendente
-    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-
-    # Elimina el propio producto de la lista de recomendaciones
-    sim_scores = sim_scores[1:]
-
-    # Toma las 5 primeras recomendaciones
-    top_juegos = sim_scores[:5]
-
-    # Obtiene los Title de los juegos recomendados
-    recomendaciones = [modelo_final.iloc[juego[0]]['title'] for juego in top_juegos]
-
-    recomendaciones = {nombre:recomendaciones}
-    return recomendaciones
 
 
 @app.get("/")
@@ -153,10 +126,6 @@ def get_userforgenre(genero: str):
 @app.get("/developer/{desarrollador}")
 def get_developer(desarrollador: str):
     return developer(desarrollador)
-
-@app.get("/recomendacion_juego/{id}")
-def get_recomendacion_juego(id: int):
-    return recomendacion_juego(id)
 
 @app.exception_handler(ValueError)
 async def value_error_exception_handler(request: Request, exc: ValueError):
