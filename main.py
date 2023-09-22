@@ -1,9 +1,8 @@
-from fastapi import FastAPI
-import pandas as pd
-from fastapi.responses import JSONResponse
 from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
-from sklearn.metrics.pairwise import cosine_similarity
+import pandas as pd
+
+
+
 
 app = FastAPI()
 
@@ -92,10 +91,6 @@ def developer(desarrollador):
         except:
             continue
     return devolver
-
-#Entrenamiento del modelo
-similitudes = cosine_similarity(modelo_final.iloc[:,2:])
-
 
 
 @app.get("/")
